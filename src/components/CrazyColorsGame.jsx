@@ -246,7 +246,7 @@ function CrazyColorsGame() {
           <button
             onClick={() => setCurrentScreen(SCREENS.SELECTION)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base text-center"
             style={{
               backgroundColor: "#a00000",
             }}
@@ -262,7 +262,7 @@ function CrazyColorsGame() {
           <button
             onClick={() => setShowSettings(true)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base text-center"
             style={{
               backgroundColor: "#b80000"
             }}
@@ -278,10 +278,15 @@ function CrazyColorsGame() {
           <button
             onClick={() => setShowExit(true)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base text-center"
+
             style={{
-              backgroundColor: "#ec0000"
-            }}
+              backgroundColor: "#ec0000",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}            
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = PRESSED_COLOR;
             }}
@@ -335,7 +340,7 @@ function CrazyColorsGame() {
 
         {/* Moving/Selected word */}
         <button
-          className={`absolute left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg text-white font-bold z-10 text-sm
+          className={`absolute left-1/2 transform -translate-x-1/2 px-4 py-2 md:px-4 md:py-2 rounded-lg text-white font-bold z-10 text-sm
             ${
               isSelectionFixed
                 ? "transition-all duration-500"
