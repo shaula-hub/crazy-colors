@@ -229,12 +229,12 @@ function CrazyColorsGame() {
         <div className="w-full">
           {/* Position from top */}
           {/* <h1 className="text-8xl font-bold text-white mb-8 text-center"> */}
-          <h1 className="text-4xl md:text-8xl font-bold text-white mb-4 md:mb-8 text-center">            
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 md:mb-8 text-center">            
             Crazy Colors
           </h1>
         <div className="text-center" style={{ color: "#1900d7" }}>
-          <p className="text-7xl md:text-3xl lg:text-4xl font-semibold mb-2">Укажите цвет</p>
-          <p className="text-6xl md:text-3xl lg:text-4xl font-semibold" style={{ color: "#3700a4" }}>букв или фона</p>
+          <p className="text-3xl md:text-5xl lg:text-7xl font-semibold mb-2">Укажите цвет</p>
+          <p className="text-2xl md:text-3xl lg:text-6xl font-semibold" style={{ color: "#3700a4" }}>букв или фона</p>
         </div>
       </div>
       {/* <div className="w-full max-w-xs mx-auto">         */}
@@ -261,7 +261,8 @@ function CrazyColorsGame() {
           </button>
           <button
             onClick={() => setShowSettings(true)}
-            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
+            // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base"
             style={{
               backgroundColor: "#b80000"
             }}
@@ -276,7 +277,8 @@ function CrazyColorsGame() {
           </button>
           <button
             onClick={() => setShowExit(true)}
-            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
+            // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base"
             style={{
               backgroundColor: "#ec0000"
             }}
