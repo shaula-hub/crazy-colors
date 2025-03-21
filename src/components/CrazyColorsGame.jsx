@@ -228,7 +228,8 @@ function CrazyColorsGame() {
       <div className="flex flex-col justify-between h-full py-16">
         <div className="w-full">
           {/* Position from top */}
-          <h1 className="text-8xl font-bold text-white mb-8 text-center">
+          {/* <h1 className="text-8xl font-bold text-white mb-8 text-center"> */}
+          <h1 className="text-4xl md:text-8xl font-bold text-white mb-4 md:mb-8 text-center">            
             Crazy Colors
           </h1>
         <div className="text-center" style={{ color: "#1900d7" }}>
@@ -237,12 +238,15 @@ function CrazyColorsGame() {
         </div>
       </div>
       {/* <div className="w-full max-w-xs mx-auto">         */}
-      <div className="mb-12 md:mb-60 w-full max-w-xs mx-auto">        
+      {/* <div className="mb-12 md:mb-60 w-full max-w-xs mx-auto">         */}
+      <div className="mb-6 md:mb-60 w-full max-w-xs mx-auto"> 
         {/* Position buttons from bottom */}
-        <div className="flex flex-col gap-4 items-center">
+        {/* <div className="flex flex-col gap-4 items-center"> */}
+        <div className="flex flex-col gap-2 md:gap-4 items-center">          
           <button
             onClick={() => setCurrentScreen(SCREENS.SELECTION)}
-            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
+            // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-xs md:text-base"
             style={{
               backgroundColor: "#a00000",
             }}
@@ -296,17 +300,19 @@ function CrazyColorsGame() {
       <div className="h-screen w-full relative overflow-hidden">
         {/* Title */}
         <h1
-          className="absolute top-4 md:top-2 left-0 right-0 text-6xl md:text-8xl font-bold text-center z-20"
+          // className="absolute top-4 md:top-2 left-0 right-0 text-6xl md:text-8xl font-bold text-center z-20"
+          className="absolute top-10 md:top-2 left-0 right-0 text-4xl md:text-8xl font-bold text-center z-20"          
           style={{ color: "#1974d2 !important"}}
         >
           {" "}
-          {/* navy CRT color */}
+          {/* navy color? black? */}
           Crazy Colors
         </h1>
         {/* Color stripes */}
         <div
           className={`absolute inset-0 flex flex-col items-center ${
-            deviceType.isMobile ? "scale-75" : ""
+            // deviceType.isMobile ? "scale-75" : ""
+            deviceType.isMobile ? "scale-75 -translate-y-10" : ""            
           }`}
         >
           {COLOR_CODES.map((color, index) => (
@@ -392,7 +398,8 @@ function CrazyColorsGame() {
       <div className="bg-white p-4 rounded-lg shadow mb-4 relative">
         <button 
           onClick={() => setCurrentScreen(SCREENS.INTRO)}
-          className="absolute -top-3 -right-3 md:top-1 md:right-1 w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 focus:outline-none z-10"
+          // className="absolute -top-3 -right-3 md:top-1 md:right-1 w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 focus:outline-none z-10"
+          className="absolute top-2 -right-3 md:top-1 md:right-1 w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 focus:outline-none z-10"
           aria-label="Return to intro"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
