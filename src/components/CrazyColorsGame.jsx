@@ -306,7 +306,7 @@ function CrazyColorsGame() {
           className="absolute top-10 md:top-2 left-0 right-0 text-4xl md:text-8xl font-bold text-center z-20"          
           style={{ color: "#1974d2 !important"}}
         >
-          {" "}
+          {/* {" "} */}
           {/* navy color? black? */}
           Crazy Colors
         </h1>
