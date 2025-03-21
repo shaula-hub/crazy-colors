@@ -25,7 +25,7 @@ const COLOR_CODES = [
   "#0000FF",
   "#8B00FF",
 ];
-const PRESSED_COLOR = "#6F00FF";
+const PRESSED_COLOR = "#623462";
 const OPTIONS = ["Какого цвета буквы?", "Какого цвета фон?"];
 
 // Game screens enum
@@ -219,28 +219,25 @@ function CrazyColorsGame() {
   // Components
   const IntroScreen = () => (
     // <div className="h-screen bg-gradient-to-b from-black via-red-500 to-violet-600">
-      <div 
-        className="h-screen" 
-        style={{
-          background: "linear-gradient(to bottom, #000000, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3)"
-        }}
-      >      
-      <div className="absolute w-full top-24">
-        {" "}
-        {/* Position from top */}
-        <h1 className="text-8xl font-bold text-white mb-8 text-center">
-        {/* style={{
-              backgroundColor: "#1900d7"
-            }} */}
-          Crazy Colors
-        </h1>
+    <div 
+      className="h-screen" 
+      style={{
+        background: "linear-gradient(to bottom, #000000, #FF0000, #FFA500, #FFFF00, #008000, #0000FF, #4B0082, #9400D3)"
+      }}
+    >    
+      <div className="flex flex-col justify-between h-full py-16">
+        <div className="w-full">
+          {/* Position from top */}
+          <h1 className="text-8xl font-bold text-white mb-8 text-center">
+            Crazy Colors
+          </h1>
         <div className="text-center" style={{ color: "#1900d7" }}>
-          <p className="text-7xl font-semibold mb-2">Укажите цвет</p>
-          <p className="text-6xl font-semibold" style={{ color: "#3700a4" }}>букв или фона</p>
+          <p className="text-7xl md:text-3xl lg:text-4xl font-semibold mb-2">Укажите цвет</p>
+          <p className="text-6xl md:text-3xl lg:text-4xl font-semibold" style={{ color: "#3700a4" }}>букв или фона</p>
         </div>
       </div>
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2">
-        {" "}
+      {/* <div className="w-full max-w-xs mx-auto">         */}
+      <div className="mb-12 md:mb-60 w-full max-w-xs mx-auto">        
         {/* Position buttons from bottom */}
         <div className="flex flex-col gap-4 items-center">
           <button
@@ -290,7 +287,8 @@ function CrazyColorsGame() {
           </button>
         </div>
       </div>
-    </div>
+      </div>
+      </div>
   );
 
   const SelectionScreen = () => {
@@ -391,7 +389,16 @@ function CrazyColorsGame() {
 </div>
 
       {/* Section 2: Statistics */}
-      <div className="bg-white p-4 rounded-lg shadow mb-4">
+      <div className="bg-white p-4 rounded-lg shadow mb-4 relative">
+        <button 
+          onClick={() => setCurrentScreen(SCREENS.INTRO)}
+          className="absolute -top-3 -right-3 md:top-1 md:right-1 w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 focus:outline-none z-10"
+          aria-label="Return to intro"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+        </button>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p>Всего вопросов: {gameStats.questionsAll}</p>
@@ -430,7 +437,7 @@ function CrazyColorsGame() {
             className="text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base font-extrabold rounded"
             style={{
               backgroundColor:
-                selectedButtonIndex === index ? PRESSED_COLOR : "#DA70D6",
+                selectedButtonIndex === index ? PRESSED_COLOR : "#000aea",
               transform:
                 selectedButtonIndex === index ? "scale(0.95)" : "scale(1)",
               transition: "transform 0.3s",
@@ -442,7 +449,7 @@ function CrazyColorsGame() {
             }}
             onMouseLeave={(e) => {
               if (selectedButtonIndex === null) {
-                e.currentTarget.style.backgroundColor = "#DA70D6";
+                e.currentTarget.style.backgroundColor = "#000aea";
               }
             }}
           >
@@ -516,8 +523,11 @@ function CrazyColorsGame() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <button
-            onClick={() => setShowExit(false)}
-            className="bg-blue-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded hover:bg-green-600"
+            onClick={() => {
+              setShowExit(false);
+              setShowSettings(true);
+            }}
+            className="bg-blue-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded"
             style={{
               backgroundColor: "#000ee3"
             }}
@@ -528,7 +538,7 @@ function CrazyColorsGame() {
               e.currentTarget.style.backgroundColor = "#000ee3";
             }}            
           >
-            Продолжить
+            Настройки
           </button>
           <button
             onClick={resetGame}
@@ -545,39 +555,6 @@ function CrazyColorsGame() {
           >
             Начать заново
           </button>
-          <div className="col-span-2 flex justify-center mt-2">          
-          <button
-            onClick={() => {
-              setShowExit(false);
-              setShowSettings(true);
-            }}
-            className="bg-blue-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded"
-            style={{
-              backgroundColor: "#000ee3"
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#6b238d";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#000ee3";
-            }}            
-            // className="bg-yellow-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded hover:bg-yellow-600"
-          >
-            Настройки
-          </button>
-          </div>
-          {/* <button
-            onClick={() => {
-              window.open("", "_self").close();
-              window.close();
-              if (window.electron) {
-                window.electron.closeWindow();
-              }
-            }}
-            className="bg-red-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded hover:bg-red-600"
-          >
-            Выйти
-          </button> */}
         </div>
       </div>
     </div>

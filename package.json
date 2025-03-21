@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "predeploy": "npm run build",
-    "deploy": "npx gh-pages -d dist",    
+    "deploy": "npx gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
+    "gh-pages": "^6.3.0",
     "globals": "^15.14.0",
     "postcss": "^8.5.1",
     "postcss-import": "^16.1.0",
