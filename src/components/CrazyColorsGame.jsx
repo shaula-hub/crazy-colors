@@ -428,7 +428,8 @@ function CrazyColorsGame() {
 
       {/* Section 3: Color Display */}
       <div
-        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-48 md:h-64 leading-loose"
+        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-40 md:h-64 leading-loose"
+        // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-48 md:h-64 leading-loose"
         style={{
           backgroundColor: COLOR_CODES[currentQuestion.backgroundColorIndex],
           color: COLOR_CODES[currentQuestion.lettersColorIndex],
@@ -438,7 +439,7 @@ function CrazyColorsGame() {
       </div>
 
       {/* Section 4: Color Buttons */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2">
         {COLOR_NAMES.map((name, index) => (
           <button
             key={index}
