@@ -297,10 +297,10 @@ function CrazyColorsGame() {
         {/* Title */}
         <h1
           className="absolute top-4 md:top-2 left-0 right-0 text-6xl md:text-8xl font-bold text-center z-20"
-          style={{ color: "#000080" }}
+          style={{ color: "#1974d2 !important"}}
         >
           {" "}
-          {/* navy color */}
+          {/* navy CRT color */}
           Crazy Colors
         </h1>
         {/* Color stripes */}
