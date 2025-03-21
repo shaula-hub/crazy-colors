@@ -644,6 +644,7 @@ function CrazyColorsGame() {
         height: deviceType.isMobile
           ? GAME_DIMENSIONS.MOBILE.minHeight
           : GAME_DIMENSIONS.DESKTOP.height,
+        minHeight: "600px",
         margin: "0 auto",
         maxWidth: "100%",
         border: "2px solid black",
