@@ -343,15 +343,13 @@ function CrazyColorsGame() {
 
         {/* Moving/Selected word */}
         <button
-          className={`absolute left-1/2 transform -translate-x-1/2 px-4 py-2 md:px-4 md:py-2 rounded-lg text-white font-bold z-10 text-sm
+          className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 md:px-4 md:py-2 rounded-lg text-white font-bold z-10 text-sm
             ${
               isSelectionFixed
-              // ? "transition-all duration-500"
-              // : "transition-all duration-300"
               ? "transition-all duration-200"
-                : "transition-all duration-150"
+              : "transition-all duration-150"
             }
-            ${deviceType.isMobile ? "scale-75" : ""}`}
+            ${deviceType.isMobile ? "scale-50" : ""}`}
           style={{
             top: isSelectionFixed
               ? `${
@@ -363,7 +361,7 @@ function CrazyColorsGame() {
             backgroundColor: "#C0C0C0",
             color: "#FFFFFF",
             transform: `translate(-50%, -50%) ${
-              isSelectionFixed ? "scale(3)" : "scale(2)"
+              isSelectionFixed ? (deviceType.isMobile ? "scale(2)" : "scale(3)") : (deviceType.isMobile ? "scale(1.2)" : "scale(2)")
             }`,
           }}
         >
