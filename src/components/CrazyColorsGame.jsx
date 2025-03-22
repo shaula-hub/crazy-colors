@@ -240,7 +240,7 @@ function CrazyColorsGame() {
       {/* <div className="w-full max-w-xs mx-auto">         */}
       {/* <div className="mb-12 md:mb-60 w-full max-w-xs mx-auto">         */}
       {/* <div className="mb-6 md:mb-60 w-full max-w-xs mx-auto">  */}
-      <div className="mb-[10vh] w-full max-w-sm mx-auto">        
+      <div className="mb-[15vh] w-full max-w-sm mx-auto">        
         {/* Position buttons from bottom */}
         {/* <div className="flex flex-col gap-4 items-center"> */}
         <div className="flex flex-col gap-4 md:gap-4 items-center">          
@@ -439,7 +439,7 @@ function CrazyColorsGame() {
 
       {/* Section 3: Color Display */}
       <div
-        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-40 md:h-64 leading-loose"
+        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-34 md:h-64 leading-loose"
         // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-48 md:h-64 leading-loose"
         style={{
           backgroundColor: COLOR_CODES[currentQuestion.backgroundColorIndex],
