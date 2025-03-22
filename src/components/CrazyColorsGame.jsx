@@ -58,11 +58,17 @@ const GAME_DIMENSIONS = {
 };
 
 const SELECTION_CONFIG = {
-  START_Y: 120,
-  STRIPE_HEIGHT: 65,
-  CHANGE_INTERVAL: 200,
-  SELECTION_DURATION: 4000,
-  PAUSE_DURATION: 2000,
+  START_Y: {
+    DESKTOP: 120,
+    MOBILE: 90  // Only changed for mobile
+  },
+  STRIPE_HEIGHT: {
+    DESKTOP: 65,
+    MOBILE: 40  // Only decreased for mobile
+  },
+  CHANGE_INTERVAL: 150,
+  SELECTION_DURATION: 3000,
+  PAUSE_DURATION: 1500,
 };
 
 function CrazyColorsGame() {
@@ -131,8 +137,8 @@ function CrazyColorsGame() {
         const randomIndex = Math.floor(Math.random() * COLOR_NAMES.length);
         setSelectionIndex(randomIndex);
         setSelectionY(
-          SELECTION_CONFIG.START_Y +
-            randomIndex * SELECTION_CONFIG.STRIPE_HEIGHT
+          (deviceType.isMobile ? SELECTION_CONFIG.START_Y.MOBILE : SELECTION_CONFIG.START_Y.DESKTOP) +
+            randomIndex * (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP)
         );
       }, SELECTION_CONFIG.CHANGE_INTERVAL);
 
@@ -150,7 +156,7 @@ function CrazyColorsGame() {
         clearTimeout(fixTimeout);
       };
     }
-  }, [currentScreen, isSelectionFixed]);
+  }, [currentScreen, isSelectionFixed, deviceType.isMobile]);
 
   // Timer for main screen
   useEffect(() => {
@@ -321,8 +327,7 @@ function CrazyColorsGame() {
         {/* Color stripes */}
         <div
           className={`absolute inset-0 flex flex-col items-center ${
-            // deviceType.isMobile ? "scale-75" : ""
-            deviceType.isMobile ? "scale-75 -translate-y-10" : ""            
+            deviceType.isMobile ? "scale-75 -translate-y-24" : ""            
           }`}
         >
           {COLOR_CODES.map((color, index) => (
@@ -331,10 +336,10 @@ function CrazyColorsGame() {
               className="absolute w-full"
               style={{
                 backgroundColor: color,
-                height: `${SELECTION_CONFIG.STRIPE_HEIGHT}px`,
+                height: `${deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP}px`,
                 top: `${
-                  SELECTION_CONFIG.START_Y +
-                  index * SELECTION_CONFIG.STRIPE_HEIGHT
+                  (deviceType.isMobile ? SELECTION_CONFIG.START_Y.MOBILE : SELECTION_CONFIG.START_Y.DESKTOP) +
+                  index * (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP)
                 }px`,
               }}
             />
@@ -343,25 +348,27 @@ function CrazyColorsGame() {
 
         {/* Moving/Selected word */}
         <button
-          className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 md:px-4 md:py-2 rounded-lg text-white font-bold z-10 text-sm
+          className={`absolute left-1/2 transform -translate-x-1/2 px-4 py-2 md:px-4 md:py-2 rounded-lg text-white font-bold z-10 text-sm
             ${
               isSelectionFixed
+              // ? "transition-all duration-500"
+              // : "transition-all duration-300"
               ? "transition-all duration-200"
-              : "transition-all duration-150"
+                : "transition-all duration-150"
             }
-            ${deviceType.isMobile ? "scale-50" : ""}`}
+            ${deviceType.isMobile ? "scale-75" : ""}`}
           style={{
             top: isSelectionFixed
-              ? `${
-                  SELECTION_CONFIG.START_Y +
-                  4 * SELECTION_CONFIG.STRIPE_HEIGHT +
-                  SELECTION_CONFIG.STRIPE_HEIGHT / 2
-                }px`
-              : `${selectionY + SELECTION_CONFIG.STRIPE_HEIGHT / 2}px`,
+            ? `${
+                (deviceType.isMobile ? SELECTION_CONFIG.START_Y.MOBILE : SELECTION_CONFIG.START_Y.DESKTOP) +
+                4 * (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP) +
+                (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP) / 2
+              }px`
+            : `${selectionY + (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP) / 2}px`,
             backgroundColor: "#C0C0C0",
             color: "#FFFFFF",
             transform: `translate(-50%, -50%) ${
-              isSelectionFixed ? (deviceType.isMobile ? "scale(2)" : "scale(3)") : (deviceType.isMobile ? "scale(1.2)" : "scale(2)")
+              isSelectionFixed ? "scale(3)" : "scale(2)"
             }`,
           }}
         >
@@ -437,7 +444,7 @@ function CrazyColorsGame() {
 
       {/* Section 3: Color Display */}
       <div
-        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-34 md:h-64 leading-loose"
+        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h- md:h-64 leading-loose"
         // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-48 md:h-64 leading-loose"
         style={{
           backgroundColor: COLOR_CODES[currentQuestion.backgroundColorIndex],
