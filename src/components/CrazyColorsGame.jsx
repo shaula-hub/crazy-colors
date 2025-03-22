@@ -233,8 +233,8 @@ function CrazyColorsGame() {
             Crazy Colors
           </h1>
         <div className="text-center" style={{ color: "#1900d7" }}>
-          <p className="text-6xl md:text-5xl lg:text-7xl font-semibold mb-2">Укажите цвет</p>
-          <p className="text-5xl md:text-3xl lg:text-6xl font-semibold" style={{ color: "#3700a4" }}>букв или фона</p>
+          <p className="text-8xl md:text-5xl lg:text-7xl font-semibold mb-2">Укажите цвет</p>
+          <p className="text-6xl md:text-3xl lg:text-6xl font-semibold" style={{ color: "#3700a4" }}>букв или фона</p>
         </div>
       </div>
       {/* <div className="w-full max-w-xs mx-auto">         */}
