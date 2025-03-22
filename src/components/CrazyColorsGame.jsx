@@ -240,14 +240,15 @@ function CrazyColorsGame() {
       {/* <div className="w-full max-w-xs mx-auto">         */}
       {/* <div className="mb-12 md:mb-60 w-full max-w-xs mx-auto">         */}
       {/* <div className="mb-6 md:mb-60 w-full max-w-xs mx-auto">  */}
-      <div className="mb-[10vh] w-full max-w-xs mx-auto">        
+      <div className="mb-[10vh] w-full max-w-sm mx-auto">        
         {/* Position buttons from bottom */}
         {/* <div className="flex flex-col gap-4 items-center"> */}
-        <div className="flex flex-col gap-2 md:gap-4 items-center">          
+        <div className="flex flex-col gap-4 md:gap-4 items-center">          
           <button
             onClick={() => setCurrentScreen(SCREENS.SELECTION)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
+            // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
+            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
             style={{
               backgroundColor: "#a00000",
             }}
@@ -263,7 +264,8 @@ function CrazyColorsGame() {
           <button
             onClick={() => setShowSettings(true)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
+            // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
+            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center" 
             style={{
               backgroundColor: "#b80000"
             }}
@@ -279,7 +281,8 @@ function CrazyColorsGame() {
           <button
             onClick={() => setShowExit(true)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
+            // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
+            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
             style={{
               backgroundColor: "#ec0000",
               textAlign: "center",
