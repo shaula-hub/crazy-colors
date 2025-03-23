@@ -252,9 +252,7 @@ function CrazyColorsGame() {
         {/* <div className="mb-[calc(10vh+48px)] md:mb-[calc(10vh+56px)] w-full max-w-sm mx-auto"> */}
           <button
             onClick={() => setCurrentScreen(SCREENS.SELECTION)}
-            // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
-            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
+            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
             style={{
               backgroundColor: "#a00000",
             }}
@@ -274,8 +272,6 @@ function CrazyColorsGame() {
               setShowSettings(true);
               }
             }
-            // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
             className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center" 
             style={{
               backgroundColor: "#b80000"
@@ -291,8 +287,6 @@ function CrazyColorsGame() {
           </button>
           <button
             onClick={() => setShowExit(true)}
-            // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
-            // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
             className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
             style={{
               backgroundColor: "#ec0000",
@@ -453,7 +447,8 @@ function CrazyColorsGame() {
 
       {/* Section 3: Color Display */}
       <div
-        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-4xl md:text-6xl font-bold h-40 md:h-64 leading-normal"        // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-40 md:h-64 leading-loose"
+        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-4xl md:text-6xl font-bold h-32 md:h-48 leading-loose"      
+        // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-4xl md:text-6xl font-bold h-40 md:h-64 leading-normal"        // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-40 md:h-64 leading-loose"
         // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-48 md:h-64 leading-loose"
         style={{
           backgroundColor: COLOR_CODES[currentQuestion.backgroundColorIndex],
