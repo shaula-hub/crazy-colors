@@ -58,17 +58,11 @@ const GAME_DIMENSIONS = {
 };
 
 const SELECTION_CONFIG = {
-  START_Y: {
-    DESKTOP: 120,
-    MOBILE: 90  // Only changed for mobile
-  },
-  STRIPE_HEIGHT: {
-    DESKTOP: 65,
-    MOBILE: 40  // Only decreased for mobile
-  },
-  CHANGE_INTERVAL: 150,
+  START_Y: 120,
+  STRIPE_HEIGHT: 65,
+  CHANGE_INTERVAL: 200,
   SELECTION_DURATION: 3000,
-  PAUSE_DURATION: 1500,
+  PAUSE_DURATION: 1000,
 };
 
 function CrazyColorsGame() {
@@ -101,6 +95,8 @@ function CrazyColorsGame() {
   });
   const [showAnswer, setShowAnswer] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+  const [isTimerPaused, setIsTimerPaused] = useState(false);
+  const [previousScreen, setPreviousScreen] = useState(null);
   /* const [timer, setTimer] = useState(null); */
 
   // Device detection state
@@ -123,6 +119,7 @@ function CrazyColorsGame() {
     const handleEsc = (event) => {
       if (event.key === "Escape" && !showAnswer) {
         setShowExit(true);
+        setIsTimerPaused(true);
       }
     };
     window.addEventListener("keydown", handleEsc);
@@ -130,15 +127,15 @@ function CrazyColorsGame() {
   }, [showAnswer]);
 
   // Selection screen animation
-  // Selection screen animation
   useEffect(() => {
-    if (currentScreen === SCREENS.SELECTION && !isSelectionFixed) {
+    if (currentScreen === SCREENS.SELECTION && !isSelectionFixed && !showExit && !showSettings) {
+    // if (currentScreen === SCREENS.SELECTION && !isSelectionFixed) {
       const changeInterval = setInterval(() => {
         const randomIndex = Math.floor(Math.random() * COLOR_NAMES.length);
         setSelectionIndex(randomIndex);
         setSelectionY(
-          (deviceType.isMobile ? SELECTION_CONFIG.START_Y.MOBILE : SELECTION_CONFIG.START_Y.DESKTOP) +
-            randomIndex * (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP)
+          SELECTION_CONFIG.START_Y +
+            randomIndex * SELECTION_CONFIG.STRIPE_HEIGHT
         );
       }, SELECTION_CONFIG.CHANGE_INTERVAL);
 
@@ -156,11 +153,11 @@ function CrazyColorsGame() {
         clearTimeout(fixTimeout);
       };
     }
-  }, [currentScreen, isSelectionFixed, deviceType.isMobile]);
+  }, [showSettings, showExit, currentScreen, isSelectionFixed]);
 
   // Timer for main screen
   useEffect(() => {
-    if (currentScreen === SCREENS.MAIN && !showAnswer) {
+    if (currentScreen === SCREENS.MAIN && !showAnswer && !showExit && !isTimerPaused) {
       const interval = setInterval(() => {
         setGameStats((prev) => ({
           ...prev,
@@ -173,7 +170,7 @@ function CrazyColorsGame() {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [currentScreen, showAnswer]);
+  }, [isTimerPaused, showExit, currentScreen, showAnswer]);
 
   const generateNewQuestion = useCallback(() => {
     let lettersIdx = Math.floor(Math.random() * COLOR_NAMES.length);
@@ -208,6 +205,7 @@ function CrazyColorsGame() {
 
     setIsAnswerCorrect(isCorrect);
     setShowAnswer(true);
+    setIsTimerPaused(false);
   };
 
   const resetGame = () => {
@@ -220,6 +218,7 @@ function CrazyColorsGame() {
     });
     setCurrentScreen(SCREENS.INTRO);
     setShowExit(false);
+    setIsTimerPaused(false); 
   };
 
   // Components
@@ -246,15 +245,16 @@ function CrazyColorsGame() {
       {/* <div className="w-full max-w-xs mx-auto">         */}
       {/* <div className="mb-12 md:mb-60 w-full max-w-xs mx-auto">         */}
       {/* <div className="mb-6 md:mb-60 w-full max-w-xs mx-auto">  */}
-      <div className="mb-[15vh] w-full max-w-sm mx-auto">        
+      <div className="mb-[10vh] w-full max-w-sm mx-auto">        
         {/* Position buttons from bottom */}
         {/* <div className="flex flex-col gap-4 items-center"> */}
-        <div className="flex flex-col gap-4 md:gap-4 items-center">          
+        <div className="flex flex-col gap-4 md:gap-4 md:mb-28 items-center">          
+        {/* <div className="mb-[calc(10vh+48px)] md:mb-[calc(10vh+56px)] w-full max-w-sm mx-auto"> */}
           <button
             onClick={() => setCurrentScreen(SCREENS.SELECTION)}
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
             // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
-            className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
+            className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center"
             style={{
               backgroundColor: "#a00000",
             }}
@@ -268,7 +268,12 @@ function CrazyColorsGame() {
             START
           </button>
           <button
-            onClick={() => setShowSettings(true)}
+            onClick={() => {
+              console.log("Settings button clicked from ExitModal, current screen:", currentScreen);
+              setPreviousScreen(SCREENS.INTRO);
+              setShowSettings(true);
+              }
+            }
             // className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-36 md:w-48 text-sm md:text-base"
             // className="text-white px-3 py-2 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-24 md:w-48 text-sm md:text-base text-center"
             className="text-white px-6 py-4 md:px-8 md:py-3 rounded-lg hover:scale-110 transition-all duration-300 font-bold w-48 md:w-48 text-xl md:text-base text-center" 
@@ -327,7 +332,8 @@ function CrazyColorsGame() {
         {/* Color stripes */}
         <div
           className={`absolute inset-0 flex flex-col items-center ${
-            deviceType.isMobile ? "scale-75 -translate-y-24" : ""            
+            // deviceType.isMobile ? "scale-75" : ""
+            deviceType.isMobile ? "scale-75 -translate-y-10" : ""            
           }`}
         >
           {COLOR_CODES.map((color, index) => (
@@ -336,10 +342,10 @@ function CrazyColorsGame() {
               className="absolute w-full"
               style={{
                 backgroundColor: color,
-                height: `${deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP}px`,
+                height: `${SELECTION_CONFIG.STRIPE_HEIGHT}px`,
                 top: `${
-                  (deviceType.isMobile ? SELECTION_CONFIG.START_Y.MOBILE : SELECTION_CONFIG.START_Y.DESKTOP) +
-                  index * (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP)
+                  SELECTION_CONFIG.START_Y +
+                  index * SELECTION_CONFIG.STRIPE_HEIGHT
                 }px`,
               }}
             />
@@ -359,16 +365,16 @@ function CrazyColorsGame() {
             ${deviceType.isMobile ? "scale-75" : ""}`}
           style={{
             top: isSelectionFixed
-            ? `${
-                (deviceType.isMobile ? SELECTION_CONFIG.START_Y.MOBILE : SELECTION_CONFIG.START_Y.DESKTOP) +
-                4 * (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP) +
-                (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP) / 2
-              }px`
-            : `${selectionY + (deviceType.isMobile ? SELECTION_CONFIG.STRIPE_HEIGHT.MOBILE : SELECTION_CONFIG.STRIPE_HEIGHT.DESKTOP) / 2}px`,
+              ? `${
+                  SELECTION_CONFIG.START_Y +
+                  4 * SELECTION_CONFIG.STRIPE_HEIGHT +
+                  SELECTION_CONFIG.STRIPE_HEIGHT / 2
+                }px`
+              : `${selectionY + SELECTION_CONFIG.STRIPE_HEIGHT / 2}px`,
             backgroundColor: "#C0C0C0",
             color: "#FFFFFF",
             transform: `translate(-50%, -50%) ${
-              isSelectionFixed ? "scale(3)" : "scale(2)"
+              isSelectionFixed ? "scale(2)" : "scale(1.5)"
             }`,
           }}
         >
@@ -415,7 +421,10 @@ function CrazyColorsGame() {
       <div className="bg-white p-4 rounded-lg shadow mb-4 relative">
         <button 
           // onClick={() => setCurrentScreen(SCREENS.INTRO)}
-          onClick={() => setShowExit(true)}          
+          onClick={() => {
+            setShowExit(true);
+            // setIsTimerPaused(true);
+          }}  
           // className="absolute -top-3 -right-3 md:top-1 md:right-1 w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 focus:outline-none z-10"
           className="absolute top-2 -right-3 md:top-1 md:right-1 w-10 h-10 flex items-center justify-center bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 focus:outline-none z-10"
           aria-label="Return to intro"
@@ -444,7 +453,7 @@ function CrazyColorsGame() {
 
       {/* Section 3: Color Display */}
       <div
-        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h- md:h-64 leading-loose"
+        className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-4xl md:text-6xl font-bold h-40 md:h-64 leading-normal"        // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-40 md:h-64 leading-loose"
         // className="p-8 rounded-lg mb-6 md:mb-8 flex items-center justify-center text-5xl md:text-7xl font-bold h-48 md:h-64 leading-loose"
         style={{
           backgroundColor: COLOR_CODES[currentQuestion.backgroundColorIndex],
@@ -519,7 +528,17 @@ function CrazyColorsGame() {
           </div>
         </div>
         <button
-          onClick={() => setShowSettings(false)}
+          onClick={() => {
+            setShowSettings(false);
+            if (previousScreen === SCREENS.MAIN) {
+              setCurrentScreen(SCREENS.MAIN);
+              setIsTimerPaused(false);
+              } else if (previousScreen) {
+              setCurrentScreen(previousScreen);
+              }
+              setPreviousScreen(null); // Reset the previous screen
+              }
+          }
           className="mt-6 bg-blue-500 text-white px-4 py-2 text-sm md:text-base rounded hover:bg-blue-600"
         >
           Закрыть
@@ -529,6 +548,13 @@ function CrazyColorsGame() {
   );
 
   const ExitModal = () => {
+    // Use effect to pause timer when modal opens
+    useEffect(() => {
+      setIsTimerPaused(true);
+      return () => {
+      // Don't automatically unpause on unmount - that will be handled by specific buttons
+      };
+      }, []);
     const handleContinue = () => {
       setShowExit(false);
       if (currentScreen === SCREENS.INTRO) {
@@ -563,6 +589,7 @@ function CrazyColorsGame() {
               setShowExit(false);
               // If we came from Intro, stay there; if from Main, go back to Main
               if (currentScreen === SCREENS.MAIN) {
+                setIsTimerPaused(false); 
                 // Return to Main with preserved stats
               }
             }}
@@ -582,8 +609,9 @@ function CrazyColorsGame() {
           <button
             onClick={() => {
               setShowExit(false);
-              setCurrentScreen(SCREENS.SELECTION)}
-            }
+              setCurrentScreen(SCREENS.SELECTION);
+              //setShowExit(false);
+            }}
             className="bg-blue-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded hover:bg-blue-600"
             style={{
               backgroundColor: "#000ee3"
@@ -599,8 +627,11 @@ function CrazyColorsGame() {
           </button>
           <button
             onClick={() => {
+              setPreviousScreen(currentScreen);
               setShowExit(false);
               setShowSettings(true);
+              // resetGame();
+              // setCurrentScreen(SCREENS.SELECTION);
             }}
             className="bg-blue-500 text-white px-3 py-3 md:px-4 md:py-2 text-sm md:text-base rounded hover:bg-green-600"
             style={{
@@ -690,6 +721,7 @@ function CrazyColorsGame() {
               }));
               setSelectedButtonIndex(null); // Reset button state
               setShowAnswer(false);
+              setIsTimerPaused(false);
               setCurrentScreen(SCREENS.SELECTION);
             }}
             className="bg-blue-500 text-white px-8 py-2 rounded-lg hover:bg-blue-600 transition-colors"
